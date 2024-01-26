@@ -13,36 +13,23 @@ public class Tester {
 
    @Test
    public void partA () {
-      LightBoard test = new LightBoard(500,650);
-      int rows = test.getLights().length;
-      int cols = test.getLights()[0].length;
-      assertEquals(500,rows);
-      assertEquals(650,cols);
-      double count = 0;
-      for(int r = 0; r < rows;r++)
-        for(int c = 0; c < cols; c++)
-          if(test.getLights()[r][c])
-            count++;
-      assertEquals(0.4,count/(rows*cols),0.2);
+      StepTracker tr = new StepTracker(10000);
+      assertEquals(0,tr.activeDays());
+      assertEquals(0,tr.averageSteps(),0.01);
+      tr.addDailySteps(9000);
+      tr.addDailySteps(5000);
+      assertEquals(0,tr.activeDays());
+      assertEquals(7000,tr.averageSteps(),0.01);
+      tr.addDailySteps(13000);
+      assertEquals(1,tr.activeDays());
+      assertEquals(9000,tr.averageSteps(),0.01);
+      tr.addDailySteps(23000);
+      tr.addDailySteps(1111);
+      assertEquals(2,tr.activeDays());
+      assertEquals(10222.2,tr.averageSteps(),0.01);
    }
 
-   @Test
-   public void partB(){
-      LightBoard test = new LightBoard(7,5);
-      String[] stars = {"**.**", "*..*.", "*..**", "*...*", "*...*", "**.**", "....."};
-      boolean[][] newLights = test.getLights();
-      for (int r = 0; r < stars.length; r++)
-         for (int c = 0; c < stars[0].length(); c++)
-           newLights[r][c] = stars[r].charAt(c) == '*';
-      assertEquals(partBFail(false,0,3), false,test.evaluateLight(0, 3));
-      assertEquals(partBFail(true,6,0),true,test.evaluateLight(6, 0));
-      assertEquals(partBFail(false,4,1),false,test.evaluateLight(4, 1));
-      assertEquals(partBFail(true,5,4),true,test.evaluateLight(5, 4));
-   }
 
-   private String partBFail(boolean expected, int num1, int num2){
-      return "Expected " + expected + " with evaluateLight(" + num1 + "," + num2 + "), but output was " + !expected;
-   }
 
 
 }
