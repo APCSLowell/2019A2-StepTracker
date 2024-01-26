@@ -1,17 +1,18 @@
 public class Main {
- public static void main(String[] args)
-  {
-    LightBoard sim = new LightBoard(7, 5);
-    System.out.println(sim);
-    System.out.println();
-
-    String[] stars = {"**.**", "*..*.", "*..**", "*...*", "*...*", "**.**", "....."};
-    boolean[][] lights = sim.getLights();
-    for (int r = 0; r < stars.length; r++)
-      for (int c = 0; c < stars[0].length(); c++)
-        lights[r][c] = stars[r].charAt(c) == '*';
-    System.out.println(sim.evaluateLight(0, 3) + " " + sim.evaluateLight(6, 0) + " " +
-                       sim.evaluateLight(4, 1) + " " + sim.evaluateLight(5, 4));
-    System.out.println();
+  public static void main(String[] args) {
+    StepTracker tr = new StepTracker(10000);
+    System.out.println(tr.activeDays()); 
+    System.out.println(tr.averageSteps());
+    tr.addDailySteps(9000); 
+    tr.addDailySteps(5000);
+    System.out.println(tr.activeDays());
+    System.out.println(tr.averageSteps());
+    tr.addDailySteps(13000);
+    System.out.println(tr.activeDays());
+    System.out.println(tr.averageSteps());
+    tr.addDailySteps(23000); 
+    tr.addDailySteps(1111);
+    System.out.println(tr.activeDays());
+    System.out.println(tr.averageSteps()); 
   }
 }
